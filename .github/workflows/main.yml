@@ -1,1 +1,29 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main  # Change this to your main branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8  # Adjust the Python version as needed
+
+    - name: Install dependencies
+      run: |
+        pip install qrcode[pil] opencv-python openpyxl
+        pip install -r requirements.txt  # If you have a requirements file
+
+    - name: Run the application
+      run: |
+        python app.py
 
